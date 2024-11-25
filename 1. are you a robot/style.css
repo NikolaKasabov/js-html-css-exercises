@@ -58,6 +58,19 @@ form button {
   cursor: pointer;
 }
 
+form button:hover {
+  opacity: 0.8;
+}
+
+form button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+form button:disabled:hover {
+  opacity: 1;
+}
+
 div#colorsContainer {
   margin-top: 80px;
   display: grid;
@@ -79,3 +92,8 @@ div#colorsContainer button {
   cursor: pointer;
   font-size: 20px;
 }
+
+div#colorsContainer button:hover {
+  opacity: 0.8;
+}
+
