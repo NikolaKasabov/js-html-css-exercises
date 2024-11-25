@@ -10,6 +10,10 @@ body {
   color: white;
 }
 
+.hidden {
+  display: none !important;
+}
+
 h1 {
   margin: 100px auto 0 auto;
   max-width: 800px;
@@ -38,7 +42,6 @@ form label {
   align-items: center;
   gap: 10px;
   font-size: 20px;
-  cursor: pointer;
 }
 
 form input {
@@ -97,3 +100,29 @@ div#colorsContainer button:hover {
   opacity: 0.8;
 }
 
+.success {
+  margin-top: 200px;
+  font-size: 60px;
+  text-align: center;
+  color: #FFB615;
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  div#colorsContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  div#colorsContainer button {
+    width: 150px;
+    height: 150px;
+  }
+
+  .success {
+    font-size: 32px;
+  }
+}

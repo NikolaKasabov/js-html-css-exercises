@@ -1,24 +1,24 @@
+const h1 = document.querySelector('h1');
 const colorPlaceholder = document.getElementById('colorPlaceholder');
 const form = document.querySelector('form');
 const formInput = document.querySelector('form input');
 const formButton = document.querySelector('form button');
 const colorsContainer = document.getElementById('colorsContainer');
+const p = document.querySelector('p');
 
 let correctColor = null;
 
 form.addEventListener('submit', ev => {
   ev.preventDefault();
-  const isChecked = ev.target.elements.areYouHuman?.checked;
-  console.log(isChecked);
+  onSuccess();
 });
 
 function disableForm() {
-  formInput.disabled = true;
   formButton.disabled = true;
 }
 
 function enableForm() {
-  formInput.disabled = false;
+  formInput.checked = true;
   formButton.disabled = false;
 }
 
@@ -31,7 +31,7 @@ function generateColorButtons() {
 
   for (let i = 0; i < 9; i++) {
     const currentColor = randomHexColor();
-    
+
     // choose random correct color
     if (randomIndex === i) {
       correctColor = currentColor;
@@ -48,3 +48,26 @@ function generateColorButtons() {
 
 generateColorButtons();
 disableForm();
+
+// listen for clicks on the color buttons
+colorsContainer.addEventListener('click', ev => {
+  // return if it is clicked the container element
+  if (ev.target.nodeName !== 'BUTTON') {
+    return;
+  }
+
+  const clickedColor = ev.target.dataset.color;
+  if (clickedColor === correctColor) {
+    enableForm();
+  } else {
+    disableForm();
+    alert('Wrong color.');
+  }
+});
+
+function onSuccess() {
+  h1.classList.add('hidden');
+  form.classList.add('hidden');
+  colorsContainer.classList.add('hidden');
+  p.classList.remove('hidden');
+}
