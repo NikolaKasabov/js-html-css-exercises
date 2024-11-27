@@ -39,3 +39,37 @@ h1 {
   width: 60px;
   text-align: center;
 }
+
+.buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  box-shadow: 0 0 5px black;
+  text-shadow: 2px 0 2px black;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn.start {
+  background-color: #58BC5C;
+}
+
+.btn.stop {
+  background-color: #DB0406;
+}
+
+.btn.reset {
+  background-color: #33B3A8;
+}
