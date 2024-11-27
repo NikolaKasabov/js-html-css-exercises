@@ -4,29 +4,43 @@ const hundredthsEl = document.querySelector('.clock .hundredths');
 const startBtn = document.querySelector('.buttons .start');
 const stopBtn = document.querySelector('.buttons .stop');
 const resetBtn = document.querySelector('.buttons .reset');
+const lapsEl = document.querySelector('.laps');
 
 let timeInHundredths = 0;
 let intervalId = null;
+let lapsCount = 0;
 
 startBtn.addEventListener('click', startClickHandler);
 stopBtn.addEventListener('click', stopClickHandler);
 resetBtn.addEventListener('click', resetClickHandler);
 
 function startClickHandler() {
-  intervalId = setInterval(() => {
-    timeInHundredths++;
-    updateClock();
-  }, 10);
+  if (!intervalId) {
+    intervalId = setInterval(() => {
+      timeInHundredths++;
+      updateClock();
+    }, 10);
+  }
 }
 
 function stopClickHandler() {
   if (intervalId) {
     clearInterval(intervalId);
+    intervalId = null;
+    lapsCount++;
+    createLapEl();
   }
 }
 
 function resetClickHandler() {
-
+  timeInHundredths = 0;
+  lapsCount = 0;
+  if (intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+  updateClock();
+  lapsEl.innerHTML = '';
 }
 
 function getTime() {
@@ -52,8 +66,20 @@ function getTime() {
 
 function updateClock() {
   const { minutes, seconds, hundredths } = getTime();
-
   minutesEl.innerText = minutes;
   secondsEl.innerText = seconds;
   hundredthsEl.innerText = hundredths;
+}
+
+function createLapEl() {
+  const lapEl = document.createElement('p');
+  lapEl.className = `lap ${(lapsCount % 2 !== 0) ? 'odd' : ''}`;
+  const { minutes, seconds, hundredths } = getTime();
+  lapEl.innerHTML = `<span>LAP:</span>
+        <span>${minutes}</span>
+        <span>:</span>
+        <span>${seconds}</span>
+        <span>:</span>
+        <span>${hundredths}</span>`;
+  lapsEl.append(lapEl);
 }
